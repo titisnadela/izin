@@ -169,6 +169,7 @@ void _showAlertDialog(BuildContext context) {
           title: new Text('Form Registration'),
           content: new Text('Please fill in the registration form correctly!'),
           actions: <Widget>[
+            // ignore: deprecated_member_use
             new FlatButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: new Text('Try again?'))

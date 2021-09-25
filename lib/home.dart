@@ -19,10 +19,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final nikhome = Text(
-      'NIK : N123',
-      style: TextStyle(fontSize: 20, color: Colors.black),
-    );
+    final nikhome = Text('NIK : ${widget.nik}');
+    print('nik');
 
     final mesin = TextFormField(
       textAlign: TextAlign.left,
