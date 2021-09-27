@@ -150,7 +150,6 @@ class _SupervisorPageState extends State<SupervisorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //backgroundColor: Color(0xfffdd835),
         appBar: AppBar(
           title: Text("APLIKASI IZIN"),
           backgroundColor: Color(0xfffdd835),
@@ -174,17 +173,6 @@ class _SupervisorPageState extends State<SupervisorPage> {
                       DataColumn(label: Text('Waktu Kembali'))
                     ],
                     source: UserDataTableSource(userData: data));
-                // rows: data
-                //     .map((e) => DataRow(cells: [
-                //           DataCell(Text(e.nik.toString())),
-                //           DataCell(Text(e.waktuIjin.toString())),
-                //           DataCell(Text(e.mesin.toString())),
-                //           DataCell(Text(e.keterangan.toString())),
-                //           DataCell(Text(e.waktuKembali.toString()))
-                //         ]
-                //         ))
-                //     .toList()
-
               } else {
                 return Text('Data Error');
               }

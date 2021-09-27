@@ -16,6 +16,9 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController password3 = new TextEditingController();
   TextEditingController password4 = new TextEditingController();
 
+  bool _isObscure = true;
+  bool _isHidden = true;
+
   // ignore: missing_return
   Future<List> _register() async {
     final response =
@@ -61,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
         hintStyle: TextStyle(color: Colors.grey),
       ),
       style: TextStyle(color: Colors.black, fontSize: 20),
-      //obscureText: true,
+      obscureText: true,
       autofocus: false,
     );
 
@@ -81,12 +84,20 @@ class _RegisterPageState extends State<RegisterPage> {
       controller: password3,
       decoration: InputDecoration(
         hintText: 'Kata Sandi',
+        suffixIcon: IconButton(
+          icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+            setState(() {
+              _isObscure = !_isObscure;
+            });
+          },
+        ),
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         hintStyle: TextStyle(color: Colors.grey),
       ),
       style: TextStyle(color: Colors.black, fontSize: 20),
-      obscureText: true,
+      obscureText: _isObscure,
       autofocus: false,
     );
 
@@ -94,12 +105,20 @@ class _RegisterPageState extends State<RegisterPage> {
       controller: password4,
       decoration: InputDecoration(
         hintText: 'Ulang Kata Sandi',
+        suffixIcon: IconButton(
+          icon: Icon(_isHidden ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+            setState(() {
+              _isHidden = !_isHidden;
+            });
+          },
+        ),
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         hintStyle: TextStyle(color: Colors.grey),
       ),
       style: TextStyle(color: Colors.black, fontSize: 20),
-      obscureText: true,
+      obscureText: _isHidden,
       autofocus: false,
     );
 

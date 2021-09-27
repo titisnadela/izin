@@ -17,6 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController email2 = new TextEditingController();
   TextEditingController password2 = new TextEditingController();
 
+  bool _isObsecure = true;
+
   String email1;
   String nik;
 
@@ -29,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
           'Accept': 'application/json',
         },
         body: json.encode({"email": email2.text, "password": password2.text}));
+    //print('nik');
 
     var datauser = jsonDecode(response.body);
 
@@ -38,7 +41,9 @@ class _LoginPageState extends State<LoginPage> {
         _showAlertDialog(context);
       });
     } else {
-      nik = datauser['nik'];
+      print(nik);
+      nik = datauser['user']['nik'];
+
       email1 = datauser['email'];
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) {
@@ -75,9 +80,18 @@ class _LoginPageState extends State<LoginPage> {
       controller: password2,
       autofocus: false,
       //initialValue: 'some password',
-      obscureText: true,
+      obscureText: _isObsecure,
       decoration: InputDecoration(
         hintText: 'Kata Sandi',
+        suffixIcon: IconButton(
+          icon: Icon(_isObsecure ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+            setState(() {
+              _isObsecure = !_isObsecure;
+            });
+          },
+        ),
+        //isDense: true,
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         hintStyle: TextStyle(color: Colors.grey, fontSize: 20),

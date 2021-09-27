@@ -1,11 +1,5 @@
-//import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:ijin/login.dart';
-//import 'package:ijin/supervisor.dart';
-//import 'package:ijin/supervisor.dart';
-// import 'package:ijin/login.dart';
-// import 'package:ijin/home.dart';
 
 class HomePage extends StatefulWidget {
   final String nik;
@@ -19,8 +13,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final nikhome = Text('NIK : ${widget.nik}');
-    print('nik');
+    final logo = Hero(
+      tag: 'PMR',
+      child: CircleAvatar(
+        backgroundColor: Colors.transparent,
+        radius: 48.0,
+        child: Image.asset('assets/PMR.png'),
+      ),
+    );
+
+    final nikhome = Text(
+      'NIK : ${widget.nik}',
+      style: TextStyle(
+          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+      textAlign: TextAlign.center,
+    );
 
     final mesin = TextFormField(
       textAlign: TextAlign.left,
@@ -49,7 +56,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: Color(0xfffdd835),
+              backgroundColor: Color(0xfffbc02d),
               padding: EdgeInsets.symmetric(horizontal: 68, vertical: 8),
             ),
             onPressed: () {},
@@ -71,12 +78,12 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: Color(0xfffdd835),
-              padding: EdgeInsets.symmetric(horizontal: 42, vertical: 8),
+              backgroundColor: Color(0xfffbc02d),
+              padding: EdgeInsets.symmetric(horizontal: 46, vertical: 8),
             ),
             onPressed: () {},
             child: Text(
-              'KEMBALI',
+              'SELESAI',
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
           ),
@@ -88,21 +95,6 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-    // final data = TextButton(
-    //   style: TextButton.styleFrom(
-    //     backgroundColor: Color(0xfffdd835),
-    //     padding: EdgeInsets.symmetric(horizontal: 42, vertical: 8),
-    //   ),
-    //   onPressed: () {
-    //     Navigator.push(context, MaterialPageRoute(builder: (context) {
-    //       return SupervisorPage();
-    //     }));
-    //   },
-    //   child: Text(
-    //     'Data',
-    //     style: TextStyle(color: Colors.white, fontSize: 25),
-    //   ),
-    // );
 
     return MaterialApp(
         home: Scaffold(
@@ -128,6 +120,7 @@ class _HomePageState extends State<HomePage> {
           // shrinkWrap: true,
           padding: EdgeInsets.only(left: 24, right: 24),
           children: <Widget>[
+            logo,
             SizedBox(height: 20),
             nikhome,
             SizedBox(height: 10),
