@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ijin/login.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   final String nik;
   final String email;
   HomePage({this.nik, this.email});
+
+  // DateTime now = DateTime.now();
+  // String formattedDate = DateFormat('yyyy-MM-dd - kk:mm').format(now);
 
   @override
   _HomePageState createState() => new _HomePageState();
@@ -12,6 +16,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  String waktu = "";
+  String waktu1 = "";
+
   Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'PMR',
@@ -59,17 +66,19 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Color(0xfffbc02d),
               padding: EdgeInsets.symmetric(horizontal: 68, vertical: 8),
             ),
-            onPressed: () {},
-            child: Text(
+            onPressed: () {
+              var time = DateFormat.yMd().add_jm().format(DateTime.now());
+              setState(() {
+                waktu = time.toString();
+              });
+            },
+            child: new Text(
               'IZIN',
               style: TextStyle(fontSize: 25, color: Colors.white),
             ),
           ),
           Padding(padding: EdgeInsets.only(left: 20)),
-          Text(
-            '11.45',
-            style: TextStyle(fontSize: 20),
-          )
+          Text(waktu),
         ],
       ),
     );
@@ -81,17 +90,42 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Color(0xfffbc02d),
               padding: EdgeInsets.symmetric(horizontal: 46, vertical: 8),
             ),
-            onPressed: () {},
+            onPressed: () {
+              var time = DateFormat.yMd().add_jm().format(DateTime.now());
+              setState(() {
+                waktu1 = time.toString();
+              });
+            },
             child: Text(
               'SELESAI',
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
           ),
           Padding(padding: EdgeInsets.only(left: 20)),
-          Text(
-            '12.45',
-            style: TextStyle(fontSize: 20),
-          )
+          Text(waktu1)
+          // Text(
+          //   DateFormat.yMd().add_jm().format(DateTime.now()),
+          //   style: TextStyle(fontSize: 20),
+          // )
+        ],
+      ),
+    );
+
+    final save = Container(
+      child: Row(
+        children: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Color(0xfffbc02d),
+              padding: EdgeInsets.symmetric(horizontal: 46, vertical: 8),
+            ),
+            onPressed: () {},
+            child: Text(
+              'SAVE',
+              style: TextStyle(color: Colors.white, fontSize: 25),
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(left: 20)),
         ],
       ),
     );
@@ -131,6 +165,8 @@ class _HomePageState extends State<HomePage> {
             ijin,
             SizedBox(height: 10),
             kembali,
+            SizedBox(height: 10),
+            save,
             //data
           ],
         ),

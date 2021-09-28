@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   http: ^0.13.3
   horizontal_data_table: ^3.4.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
