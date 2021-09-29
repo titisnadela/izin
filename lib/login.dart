@@ -21,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
 
   String email1;
   String nik;
+  String token;
 
   // ignore: missing_return
   Future<List> _login() async {
@@ -41,13 +42,14 @@ class _LoginPageState extends State<LoginPage> {
         _showAlertDialog(context);
       });
     } else {
+      token = datauser['token'];
       print(nik);
       nik = datauser['user']['nik'];
 
       email1 = datauser['email'];
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) {
-        return HomePage(nik: nik, email: email1);
+        return HomePage(nik: nik, email: email1, token: token);
       }));
       print(response.body);
     }

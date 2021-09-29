@@ -1,23 +1,49 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:ijin/login.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   final String nik;
   final String email;
-  HomePage({this.nik, this.email});
-
-  // DateTime now = DateTime.now();
-  // String formattedDate = DateFormat('yyyy-MM-dd - kk:mm').format(now);
+  final String token;
+  HomePage({this.nik, this.email, this.token});
 
   @override
   _HomePageState createState() => new _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController mesinn = new TextEditingController();
+  TextEditingController keterangan = new TextEditingController();
+
+  // ignore: missing_return
+  Future<List> _save() async {
+    // ignore: unused_local_variable
+    final response =
+        await http.post(Uri.parse("http://192.168.98.95:8000/api/ijins"),
+            headers: {
+              'Authorization': '${widget.token}',
+              'Content-type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: json.encode({
+              "nik": widget.nik,
+              "mesin": mesinn.text,
+              "keterangan": keterangan.text,
+              "waktu_ijin": waktu,
+              "waktu_kembali": waktu1
+            }));
+    print(response.body);
+  }
+
   @override
+  // ignore: override_on_non_overriding_member
   String waktu = "";
   String waktu1 = "";
+  var time;
 
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -29,14 +55,17 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    final nikhome = Text(
-      'NIK : ${widget.nik}',
-      style: TextStyle(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
-      textAlign: TextAlign.center,
+    final nikhome = Container(
+      child: Text(
+        'NIK : ${widget.nik}',
+        style: TextStyle(
+            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+        textAlign: TextAlign.center,
+      ),
     );
 
     final mesin = TextFormField(
+      controller: mesinn,
       textAlign: TextAlign.left,
       decoration: InputDecoration(
         hintText: 'Mesin',
@@ -49,6 +78,7 @@ class _HomePageState extends State<HomePage> {
     );
     Padding(padding: EdgeInsets.all(10));
     final deskripsi = TextFormField(
+      controller: keterangan,
       decoration: InputDecoration(
         hintText: 'Keterangan',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -103,30 +133,25 @@ class _HomePageState extends State<HomePage> {
           ),
           Padding(padding: EdgeInsets.only(left: 20)),
           Text(waktu1)
-          // Text(
-          //   DateFormat.yMd().add_jm().format(DateTime.now()),
-          //   style: TextStyle(fontSize: 20),
-          // )
         ],
       ),
     );
 
-    final save = Container(
-      child: Row(
-        children: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Color(0xfffbc02d),
-              padding: EdgeInsets.symmetric(horizontal: 46, vertical: 8),
-            ),
-            onPressed: () {},
-            child: Text(
-              'SAVE',
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
-          ),
-          Padding(padding: EdgeInsets.only(left: 20)),
-        ],
+    final save = Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      child: Material(
+        borderRadius: BorderRadius.circular(30.0),
+        shadowColor: Colors.lightBlueAccent.shade100,
+        elevation: 5.0,
+        child: MaterialButton(
+          minWidth: 200.0,
+          height: 42.0,
+          onPressed: () {
+            _save();
+          },
+          color: Color(0xfffdd835),
+          child: Text('SIMPAN', style: TextStyle(color: Colors.white)),
+        ),
       ),
     );
 
