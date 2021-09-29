@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     final response =
         await http.post(Uri.parse("http://192.168.98.95:8000/api/ijins"),
             headers: {
-              'Authorization': '${widget.token}',
+              'Authorization': 'Bearer ${widget.token}',
               'Content-type': 'application/json',
               'Accept': 'application/json',
             },

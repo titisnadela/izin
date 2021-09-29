@@ -185,13 +185,13 @@ void _showAlertDialog(BuildContext context) {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text('Form Registration'),
-          content: new Text('Please fill in the registration form correctly!'),
+          title: new Text('Pendaftaran'),
+          content: new Text('Mohon isi formulir pendaftaran dengan benar!'),
           actions: <Widget>[
             // ignore: deprecated_member_use
             new FlatButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: new Text('Try again?'))
+                child: new Text('Coba lagi!'))
           ],
         );
       });
