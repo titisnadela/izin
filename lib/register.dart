@@ -64,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
         hintStyle: TextStyle(color: Colors.grey),
       ),
       style: TextStyle(color: Colors.black, fontSize: 20),
-      obscureText: true,
+      //obscureText: true,
       autofocus: false,
     );
 

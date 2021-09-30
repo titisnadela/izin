@@ -1,4 +1,0 @@
-#Thu Sep 23 15:26:47 ICT 2021
-base.0=C\:\\Users\\titis\\ijins\\ijin\\build\\app\\intermediates\\transforms\\r8\\release\\0\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex

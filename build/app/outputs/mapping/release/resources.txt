@@ -4,6 +4,7 @@ Referenced Strings:
   %s.%sParcelizer
   0
   0x%08x
+  :memory:
   ACCESSIBLE_NAVIGATION
   ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN
   ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT
@@ -177,6 +178,7 @@ Referenced Strings:
   STANDARD
   STARTED
   SettingsChannel
+  Sqflite
   SystemChannel
   SystemChrome.restoreSystemUIOverlays
   SystemChrome.setApplicationSwitcherDe...
@@ -245,6 +247,7 @@ Referenced Strings:
   URI
   URL
   UTF8
+  UseSparseArrays
   V:
   VD_PLATFORM_VIEW
   VISIBLE_PASSWORD
@@ -277,15 +280,19 @@ Referenced Strings:
   android.widget.ScrollView
   android.widget.SeekBar
   android.widget.Switch
+  androidThreadPriority
   androidx.savedstate.Restarter
   announce
   args
+  arguments
   autocorrect
   autofill
   background
   background_mode
+  bad_param
   base
   basic
+  batch
   birthDateDay
   birthDateFull
   birthDateMonth
@@ -301,11 +308,17 @@ Referenced Strings:
   cleartextTrafficPermitted
   click
   clipboard
+  closeDatabase
+  cmd
+  code
   codePoint
+  columns
+  com.tekartik.sqflite
   componentName
   composingBase
   composingExtent
   contextMenu
+  continueOnError
   copy
   countryName
   create
@@ -317,7 +330,11 @@ Referenced Strings:
   creditCardSecurityCode
   dark
   data
+  databases
+  debug
+  debugMode
   decimal
+  deleteDatabase
   destroy_engine_with_activity
   deviceId
   direction
@@ -332,6 +349,7 @@ Referenced Strings:
   enable_state_restoration
   enabled
   error
+  execute
   extendedAddress
   extendedPostalCode
   extent
@@ -361,8 +379,10 @@ Referenced Strings:
   gender
   get
   getChildId
+  getDatabasesPath
   getDeferredComponentInstallState
   getParentNodeId
+  getPlatformVersion
   getResId
   getResPackage
   getSourceNodeId
@@ -376,10 +396,12 @@ Referenced Strings:
   hybrid
   id
   image
+  inTransaction
   includeSubdomains
   inputAction
   inputType
   input_method
+  insert
   installDeferredComponent
   io.flutter.Entrypoint
   io.flutter.InitialRoute
@@ -401,6 +423,7 @@ Referenced Strings:
   light
   loadingUnitId
   locale
+  logLevel
   longPress
   mChildNodeIds
   mH
@@ -420,6 +443,7 @@ Referenced Strings:
   newPassword
   newUsername
   noDrop
+  noResult
   nodeId
   none
   obscureText
@@ -440,9 +464,13 @@ Referenced Strings:
   onUserLeaveHint
   oneTimeCode
   opaque
+  openDatabase
+  operations
+  options
   overlay
   params
   password
+  path
   personFamilyName
   personGivenName
   personMiddleInitial
@@ -469,7 +497,12 @@ Referenced Strings:
   push
   pushRoute
   put
+  query
+  queryAsMapList
   read
+  readOnly
+  recovered
+  recoveredInTransaction
   registerWith
   removeView
   removeViewImmediate
@@ -488,7 +521,9 @@ Referenced Strings:
   resizeUpLeftDownRight
   resizeUpRight
   resizeUpRightDownLeft
+  result
   route
+  rows
   scanCode
   selectionBase
   selectionExtent
@@ -496,8 +531,11 @@ Referenced Strings:
   setInitialRoute
   setLocale
   signed
+  singleInstance
   smsOTPCode
   source
+  sql
+  sqlite_error
   statusBarColor
   statusBarIconBrightness
   streetAddress
@@ -510,6 +548,7 @@ Referenced Strings:
   systemNavigationBarIconBrightness
   systemStatusBarContrastEnforced
   tap
+  tekartik_sqflite.db
   telephoneNumber
   telephoneNumberCountryCode
   telephoneNumberDevice
@@ -527,6 +566,7 @@ Referenced Strings:
   type
   uninstallDeferredComponent
   uniqueIdentifier
+  update
   updateViewLayout
   username
   usesVirtualDisplay

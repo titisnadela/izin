@@ -201,13 +201,13 @@ void _showAlertDialog(BuildContext context) {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text('Wrong email or password'),
-          content: new Text('Please enter correct email or password'),
+          title: new Text('Email atau kata sandi salah'),
+          content: new Text('Mohon masukkan email dan kata sandi yang benar'),
           actions: <Widget>[
             // ignore: deprecated_member_use
             new FlatButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: new Text('Try again?'))
+                child: new Text('Coba lagi'))
           ],
         );
       });

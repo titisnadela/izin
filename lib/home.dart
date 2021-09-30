@@ -19,6 +19,10 @@ class _HomePageState extends State<HomePage> {
   TextEditingController mesinn = new TextEditingController();
   TextEditingController keterangan = new TextEditingController();
 
+  String waktu = "";
+  String waktu1 = "";
+  var time;
+
   // ignore: missing_return
   Future<List> _save() async {
     // ignore: unused_local_variable
@@ -36,15 +40,20 @@ class _HomePageState extends State<HomePage> {
               "waktu_ijin": waktu,
               "waktu_kembali": waktu1
             }));
-    print(response.body);
+    if (response.statusCode != 201) {
+      _showDialog(context);
+    } else {
+      setState(() {
+        mesinn.clear();
+        keterangan.clear();
+        waktu = "";
+        waktu1 = "";
+      });
+    }
+    //print(response.body));
   }
 
   @override
-  // ignore: override_on_non_overriding_member
-  String waktu = "";
-  String waktu1 = "";
-  var time;
-
   Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'PMR',
@@ -198,4 +207,21 @@ class _HomePageState extends State<HomePage> {
       ),
     ));
   }
+}
+
+void _showDialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text('Form Izin'),
+          content: new Text('Mohon formulir diisi dengan benar.'),
+          actions: [
+            // ignore: deprecated_member_use
+            new FlatButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: new Text('Coba Lagi!'))
+          ],
+        );
+      });
 }
