@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:ijin/login.dart';
+//import 'package:ijin/login.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+//import 'package:ijin/supervisor.dart';
 
 class HomePage extends StatefulWidget {
   final String nik;
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController nik = new TextEditingController();
   TextEditingController mesinn = new TextEditingController();
   TextEditingController keterangan = new TextEditingController();
 
@@ -64,20 +66,33 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    final nikhome = Container(
-      child: Text(
-        'NIK : ${widget.nik}',
-        style: TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
-        textAlign: TextAlign.center,
+    // final nikhome = Container(
+    //   child: Text(
+    //     'NIK : ${widget.nik}',
+    //     style: TextStyle(
+    //         fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+    //     textAlign: TextAlign.center,
+    //   ),
+    // );
+
+    final nomor = TextFormField(
+      controller: nik,
+      textAlign: TextAlign.left,
+      decoration: InputDecoration(
+        hintText: 'NIK',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        hintStyle: TextStyle(color: Colors.grey),
       ),
+      style: TextStyle(color: Colors.black, fontSize: 20),
+      autofocus: false,
     );
 
     final mesin = TextFormField(
       controller: mesinn,
       textAlign: TextAlign.left,
       decoration: InputDecoration(
-        hintText: 'Mesin',
+        hintText: 'Departemen',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         hintStyle: TextStyle(color: Colors.grey),
@@ -109,6 +124,7 @@ class _HomePageState extends State<HomePage> {
               var time = DateFormat.yMd().add_jm().format(DateTime.now());
               setState(() {
                 waktu = time.toString();
+                _save();
               });
             },
             child: new Text(
@@ -121,48 +137,69 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-    final kembali = Container(
-      child: Row(
-        children: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Color(0xfffbc02d),
-              padding: EdgeInsets.symmetric(horizontal: 46, vertical: 8),
-            ),
-            onPressed: () {
-              var time = DateFormat.yMd().add_jm().format(DateTime.now());
-              setState(() {
-                waktu1 = time.toString();
-              });
-            },
-            child: Text(
-              'SELESAI',
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
-          ),
-          Padding(padding: EdgeInsets.only(left: 20)),
-          Text(waktu1)
-        ],
-      ),
-    );
+    // final kembali = Container(
+    //   child: Row(
+    //     children: <Widget>[
+    //       TextButton(
+    //         style: TextButton.styleFrom(
+    //           backgroundColor: Color(0xfffbc02d),
+    //           padding: EdgeInsets.symmetric(horizontal: 46, vertical: 8),
+    //         ),
+    //         onPressed: () {
+    //           var time = DateFormat.yMd().add_jm().format(DateTime.now());
+    //           setState(() {
+    //             waktu1 = time.toString();
+    //           });
+    //         },
+    //         child: Text(
+    //           'SELESAI',
+    //           style: TextStyle(color: Colors.white, fontSize: 25),
+    //         ),
+    //       ),
+    //       Padding(padding: EdgeInsets.only(left: 20)),
+    //       Text(waktu1)
+    //     ],
+    //   ),
+    // );
 
-    final save = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: Material(
-        borderRadius: BorderRadius.circular(30.0),
-        shadowColor: Colors.lightBlueAccent.shade100,
-        elevation: 5.0,
-        child: MaterialButton(
-          minWidth: 200.0,
-          height: 42.0,
-          onPressed: () {
-            _save();
-          },
-          color: Color(0xfffdd835),
-          child: Text('SIMPAN', style: TextStyle(color: Colors.white)),
-        ),
-      ),
-    );
+    // final save = Padding(
+    //   padding: EdgeInsets.symmetric(vertical: 16.0),
+    //   child: Material(
+    //     borderRadius: BorderRadius.circular(30.0),
+    //     shadowColor: Colors.lightBlueAccent.shade100,
+    //     elevation: 5.0,
+    //     child: MaterialButton(
+    //       minWidth: 200.0,
+    //       height: 42.0,
+    //       onPressed: () {
+    //         _save();
+    //       },
+    //       color: Color(0xfffdd835),
+    //       child: Text('SIMPAN', style: TextStyle(color: Colors.white)),
+    //     ),
+    //   ),
+    // );
+
+    // final data = Padding(
+    //   padding: EdgeInsets.symmetric(vertical: 16.0),
+    //   child: Material(
+    //     borderRadius: BorderRadius.circular(30.0),
+    //     shadowColor: Colors.lightBlueAccent.shade100,
+    //     elevation: 5.0,
+    //     child: MaterialButton(
+    //       minWidth: 200.0,
+    //       height: 42.0,
+    //       onPressed: () {
+    //         Navigator.push(context, MaterialPageRoute(builder: (context) {
+    //           return SupervisorPage();
+    //         }));
+    //       },
+    //       color: Color(0xff827717),
+    //       child: Text('Data karyawan izin',
+    //           style: TextStyle(color: Colors.white, fontSize: 15)),
+    //     ),
+    //   ),
+    // );
 
     return MaterialApp(
         home: Scaffold(
@@ -172,15 +209,15 @@ class _HomePageState extends State<HomePage> {
           "APLIKASI IZIN",
           style: TextStyle(fontSize: 25),
         ),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.logout),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return LoginPage();
-                }));
-              })
-        ],
+        // actions: [
+        //   IconButton(
+        //       icon: Icon(Icons.logout),
+        //       onPressed: () {
+        //         Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //           return HomePage();
+        //         }));
+        //       })
+        // ],
         backgroundColor: Color(0xfffdd835),
       ),
       body: Center(
@@ -190,7 +227,9 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             logo,
             SizedBox(height: 20),
-            nikhome,
+            // nikhome,
+            // SizedBox(height: 10),
+            nomor,
             SizedBox(height: 10),
             mesin,
             SizedBox(height: 10),
@@ -198,9 +237,11 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 10),
             ijin,
             SizedBox(height: 10),
-            kembali,
+            // kembali,
+            // SizedBox(height: 10),
+            //save,
+            //data,
             SizedBox(height: 10),
-            save,
             //data
           ],
         ),

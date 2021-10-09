@@ -1,10 +1,7 @@
 //import 'dart:js';
 
 import 'package:flutter/material.dart';
-import 'login.dart';
-//import 'package:ijin/home.dart';
-//import 'package:ijin/login.dart';
-//import 'package:ijin/register.dart';
+import 'package:ijin/selesai.dart';
 
 void main() => runApp(IjinApp());
 
@@ -20,10 +17,10 @@ class IjinApp extends StatelessWidget {
     return MaterialApp(
         title: 'Ijin App',
         debugShowCheckedModeBanner: false,
-        home: LoginPage(),
+        home: SelesaiPage(),
         routes: <String, WidgetBuilder>{
-          '/Home': (BuildContext context) => LoginPage(),
-          '/MainPage': (BuildContext context) => LoginPage()
+          '/Home': (BuildContext context) => SelesaiPage(),
+          //'/MainPage': (BuildContext context) => PertamaPage()
         });
   }
 }

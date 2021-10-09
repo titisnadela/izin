@@ -87,10 +87,12 @@ class _SupervisorPageState extends State<SupervisorPage> {
               if (snapshot.hasData) {
                 List<Ijin> data = snapshot.data as List<Ijin>;
                 return PaginatedDataTable(
+
                     // physics: ClampingScrollPhysics(),
                     // scrollDirection: Axis.horizontal,
                     // child: PaginatedDataTable(
                     rowsPerPage: 13,
+                    sortAscending: true,
                     columns: <DataColumn>[
                       DataColumn(label: Text('NIK')),
                       DataColumn(label: Text('Waktu Izin')),
@@ -122,7 +124,6 @@ class UserDataTableSource extends DataTableSource {
       return null;
     }
     final _user = _userData[index];
-
     return DataRow.byIndex(index: index, cells: <DataCell>[
       DataCell(Text('${_user.nik}')),
       DataCell(Text('${_user.waktuIjin}')),
