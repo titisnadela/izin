@@ -56,9 +56,16 @@ Future<List<Ijin>> getIjins2() async {
   }
 }
 
-Future<List<Ijin>> putIjins(int id) async {
-  var response =
-      await http.put(Uri.parse('http://192.168.98.95/8000/api/status/${id}'));
+// ignore: missing_return
+void putIjins(int id) async {
+  // ignore: unused_local_variable
+  var response = await http.put(
+    Uri.parse('http://192.168.98.95:8000/api/status/$id'),
+    headers: {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    },
+  );
 }
 
 // ignore: must_be_immutable
@@ -84,7 +91,8 @@ class _SelesaiPageState extends State<SelesaiPage> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return HomePage();
                   }));
-                })
+                }),
+            IconButton(onPressed: () {}, icon: Icon(Icons.search))
           ],
           backgroundColor: Color(0xfffdd835),
         ),
@@ -127,7 +135,7 @@ class _SelesaiPageState extends State<SelesaiPage> {
                                   ),
                                   onTap: () {
                                     setState(() {
-                                      data.removeAt(index);
+                                      //data.removeAt(index);
                                       putIjins(data[index].id);
                                     });
                                   }),

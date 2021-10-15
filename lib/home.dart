@@ -31,21 +31,24 @@ class _HomePageState extends State<HomePage> {
     final response =
         await http.post(Uri.parse("http://192.168.98.95:8000/api/ijins"),
             headers: {
-              'Authorization': 'Bearer ${widget.token}',
+              // 'Authorization': 'Bearer ${widget.token}',
               'Content-type': 'application/json',
               'Accept': 'application/json',
             },
             body: json.encode({
-              "nik": widget.nik,
+              "nik": nik.text,
               "mesin": mesinn.text,
               "keterangan": keterangan.text,
               "waktu_ijin": waktu,
-              "waktu_kembali": waktu1
+              "waktu_kembali": waktu1,
+              "status": 1
             }));
+    print(response.body);
     if (response.statusCode != 201) {
       _showDialog(context);
     } else {
       setState(() {
+        nik.clear();
         mesinn.clear();
         keterangan.clear();
         waktu = "";
@@ -123,6 +126,8 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               var time = DateFormat.yMd().add_jm().format(DateTime.now());
               setState(() {
+                var time1 = DateTime.parse('0000-00-00 00:00:00');
+                waktu1 = time1.toString();
                 waktu = time.toString();
                 _save();
               });
@@ -209,6 +214,10 @@ class _HomePageState extends State<HomePage> {
           "APLIKASI IZIN",
           style: TextStyle(fontSize: 25),
         ),
+        leading: new IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Icon(Icons.arrow_back)),
+
         // actions: [
         //   IconButton(
         //       icon: Icon(Icons.logout),
