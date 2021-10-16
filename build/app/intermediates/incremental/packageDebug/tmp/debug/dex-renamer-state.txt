@@ -1,4 +1,4 @@
-#Fri Oct 15 16:02:34 ICT 2021
+#Sat Oct 16 11:00:29 ICT 2021
 base.0=D\:\\titis\\ijins\\ijin\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

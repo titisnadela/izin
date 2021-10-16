@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:ijin/selesai.dart';
 //import 'package:ijin/login.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -215,7 +216,11 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(fontSize: 25),
         ),
         leading: new IconButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return SelesaiPage();
+                  },
+                )),
             icon: Icon(Icons.arrow_back)),
 
         // actions: [

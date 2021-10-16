@@ -79,6 +79,14 @@ class SelesaiPage extends StatefulWidget {
 }
 
 class _SelesaiPageState extends State<SelesaiPage> {
+  Future<List<Ijin>> _ijins;
+
+  @override
+  void initState() {
+    super.initState();
+    _ijins = getIjins2();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +105,8 @@ class _SelesaiPageState extends State<SelesaiPage> {
           backgroundColor: Color(0xfffdd835),
         ),
         body: FutureBuilder(
-            future: getIjins2(),
+            future: _ijins,
+            //future: getIjins2(),
             builder: (context, snapshot) {
               List<Ijin> data = snapshot.data as List<Ijin>;
               if (snapshot.hasData) {
@@ -135,8 +144,9 @@ class _SelesaiPageState extends State<SelesaiPage> {
                                   ),
                                   onTap: () {
                                     setState(() {
-                                      //data.removeAt(index);
                                       putIjins(data[index].id);
+                                      data.removeAt(index);
+                                      _ijins = getIjins2();
                                     });
                                   }),
                             ],
