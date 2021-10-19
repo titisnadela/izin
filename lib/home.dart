@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
 import 'package:ijin/selesai.dart';
 //import 'package:ijin/login.dart';
@@ -18,13 +19,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController nik = new TextEditingController();
-  TextEditingController mesinn = new TextEditingController();
-  TextEditingController keterangan = new TextEditingController();
+  //TextEditingController nik = new TextEditingController();
+  // TextEditingController mesinn = new TextEditingController();
+  // TextEditingController keterangan = new TextEditingController();
 
   String waktu = "";
   String waktu1 = "";
   var time;
+
+  String selectNIK = "";
+  String selectMesin = "";
+  String selectKet = "";
+
+  List<String> nomor = ["n234", "m123", "1098"];
+  List<String> mesinnn = [
+    "CFM",
+    "BUBUT",
+    "ENGRAVE",
+    "LAB",
+    "PLATING",
+    "PROFF",
+    "QA",
+    "WAREHOUSE"
+  ];
+  List<String> ket = ["SOLAT", "TOILET", "AMBIL BAHAN"];
+
+  final nikSelected = TextEditingController();
+  final mesinSelected = TextEditingController();
+  final ketSelected = TextEditingController();
 
   // ignore: missing_return
   Future<List> _save() async {
@@ -37,9 +59,9 @@ class _HomePageState extends State<HomePage> {
               'Accept': 'application/json',
             },
             body: json.encode({
-              "nik": nik.text,
-              "mesin": mesinn.text,
-              "keterangan": keterangan.text,
+              "nik": selectNIK,
+              "mesin": selectMesin,
+              "keterangan": selectKet,
               "waktu_ijin": waktu,
               "waktu_kembali": waktu1,
               "status": 1
@@ -49,9 +71,9 @@ class _HomePageState extends State<HomePage> {
       _showDialog(context);
     } else {
       setState(() {
-        nik.clear();
-        mesinn.clear();
-        keterangan.clear();
+        nikSelected.clear();
+        mesinSelected.clear();
+        ketSelected.clear();
         waktu = "";
         waktu1 = "";
       });
@@ -79,42 +101,66 @@ class _HomePageState extends State<HomePage> {
     //   ),
     // );
 
-    final nomor = TextFormField(
-      controller: nik,
-      textAlign: TextAlign.left,
-      decoration: InputDecoration(
-        hintText: 'NIK',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-        hintStyle: TextStyle(color: Colors.grey),
-      ),
-      style: TextStyle(color: Colors.black, fontSize: 20),
-      autofocus: false,
+    final nik = DropDownField(
+      controller: nikSelected,
+      hintText: "NIK",
+      enabled: true,
+      items: nomor,
+      onValueChanged: (value) {
+        setState(() {
+          selectNIK = value;
+        });
+      },
+      // textAlign: TextAlign.left,
+      // decoration: InputDecoration(
+      //   hintText: 'NIK',
+      //   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      //   hintStyle: TextStyle(color: Colors.grey),
+      // ),
+      // style: TextStyle(color: Colors.black, fontSize: 20),
+      // autofocus: false,
     );
 
-    final mesin = TextFormField(
-      controller: mesinn,
-      textAlign: TextAlign.left,
-      decoration: InputDecoration(
-        hintText: 'Departemen',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-        hintStyle: TextStyle(color: Colors.grey),
-      ),
-      style: TextStyle(color: Colors.black, fontSize: 20),
-      autofocus: false,
+    final mesin = DropDownField(
+      controller: mesinSelected,
+      hintText: "Departemen",
+      enabled: true,
+      items: mesinnn,
+      onValueChanged: (value) {
+        setState(() {
+          selectMesin = value;
+        });
+      },
+      // textAlign: TextAlign.left,
+      // decoration: InputDecoration(
+      //   hintText: 'Departemen',
+      //   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      //   hintStyle: TextStyle(color: Colors.grey),
+      // ),
+      // style: TextStyle(color: Colors.black, fontSize: 20),
+      // autofocus: false,
     );
     Padding(padding: EdgeInsets.all(10));
-    final deskripsi = TextFormField(
-      controller: keterangan,
-      decoration: InputDecoration(
-        hintText: 'Keterangan',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-        hintStyle: TextStyle(color: Colors.grey),
-      ),
-      style: TextStyle(color: Colors.black, fontSize: 20),
-      autofocus: false,
+    final deskripsi = DropDownField(
+      controller: ketSelected,
+      hintText: "Keterangan",
+      enabled: true,
+      items: ket,
+      onValueChanged: (value) {
+        setState(() {
+          selectKet = value;
+        });
+      },
+      // decoration: InputDecoration(
+      //   hintText: 'Keterangan',
+      //   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+      //   hintStyle: TextStyle(color: Colors.grey),
+      // ),
+      // style: TextStyle(color: Colors.black, fontSize: 20),
+      // autofocus: false,
     );
     final ijin = Container(
       child: Row(
@@ -222,7 +268,6 @@ class _HomePageState extends State<HomePage> {
                   },
                 )),
             icon: Icon(Icons.arrow_back)),
-
         // actions: [
         //   IconButton(
         //       icon: Icon(Icons.logout),
@@ -243,7 +288,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 20),
             // nikhome,
             // SizedBox(height: 10),
-            nomor,
+            nik,
             SizedBox(height: 10),
             mesin,
             SizedBox(height: 10),
