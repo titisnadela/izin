@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //TextEditingController nik = new TextEditingController();
+  TextEditingController nomor = new TextEditingController();
   // TextEditingController mesinn = new TextEditingController();
   // TextEditingController keterangan = new TextEditingController();
 
@@ -27,24 +27,24 @@ class _HomePageState extends State<HomePage> {
   String waktu1 = "";
   var time;
 
-  String selectNIK = "";
+  //String selectNIK = "";
   String selectMesin = "";
   String selectKet = "";
 
-  List<String> nomor = ["n234", "m123", "1098"];
+  // List<String> nomor = ["n234", "m123", "1098"];
   List<String> mesinnn = [
     "CFM",
     "BUBUT",
     "ENGRAVE",
     "LAB",
     "PLATING",
-    "PROFF",
+    "PROOF",
     "QA",
     "WAREHOUSE"
   ];
   List<String> ket = ["SOLAT", "TOILET", "AMBIL BAHAN"];
 
-  final nikSelected = TextEditingController();
+  // final nikSelected = TextEditingController();
   final mesinSelected = TextEditingController();
   final ketSelected = TextEditingController();
 
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               'Accept': 'application/json',
             },
             body: json.encode({
-              "nik": selectNIK,
+              "nik": nomor.text,
               "mesin": selectMesin,
               "keterangan": selectKet,
               "waktu_ijin": waktu,
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
       _showDialog(context);
     } else {
       setState(() {
-        nikSelected.clear();
+        nomor.clear();
         mesinSelected.clear();
         ketSelected.clear();
         waktu = "";
@@ -101,25 +101,25 @@ class _HomePageState extends State<HomePage> {
     //   ),
     // );
 
-    final nik = DropDownField(
-      controller: nikSelected,
-      hintText: "NIK",
-      enabled: true,
-      items: nomor,
-      onValueChanged: (value) {
-        setState(() {
-          selectNIK = value;
-        });
-      },
-      // textAlign: TextAlign.left,
-      // decoration: InputDecoration(
-      //   hintText: 'NIK',
-      //   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-      //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      //   hintStyle: TextStyle(color: Colors.grey),
-      // ),
-      // style: TextStyle(color: Colors.black, fontSize: 20),
-      // autofocus: false,
+    final nik = TextFormField(
+      controller: nomor,
+      // hintText: "NIK",
+      // enabled: true,
+      // items: nomor,
+      // onValueChanged: (value) {
+      //   setState(() {
+      //     selectNIK = value;
+      //   });
+      // },
+      textAlign: TextAlign.left,
+      decoration: InputDecoration(
+        hintText: 'NIK',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        hintStyle: TextStyle(color: Colors.grey),
+      ),
+      style: TextStyle(color: Colors.black, fontSize: 20),
+      autofocus: false,
     );
 
     final mesin = DropDownField(

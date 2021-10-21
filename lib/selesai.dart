@@ -1,7 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:ijin/home.dart';
 
 class Ijin {
@@ -80,11 +80,52 @@ class SelesaiPage extends StatefulWidget {
 
 class _SelesaiPageState extends State<SelesaiPage> {
   Future<List<Ijin>> _ijins;
+  TextEditingController searchController = new TextEditingController();
+  final dio = new Dio();
+  String _searchText = "";
+  List names = new List();
+  List filteredNames = new List();
+  Icon _searchIcon = new Icon(Icons.search);
+  Widget _appBarTitle = new Text('Search Example');
+
+  //   _SearchBarExampleState() {
+  //   _filter.addListener(() {
+  //     if (_filter.text.isEmpty) {
+  //       setState(() {
+  //         _searchText = '';
+  //         filteredNames = names;
+  //       });
+  //     } else {
+  //       setState(() {
+  //         _searchText = _filter.text;
+  //       });
+  //     }
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
     _ijins = getIjins2();
+    _searchPressed();
+  }
+
+  void _searchPressed() {
+    setState(() {
+      if (this._searchIcon.icon == Icons.search) {
+        this._searchIcon = new Icon(Icons.close);
+        this._appBarTitle = TextField(
+          controller: searchController,
+          decoration: new InputDecoration(
+              prefixIcon: new Icon(Icons.search), hintText: 'Search...'),
+        );
+      } else {
+        this._searchIcon = new Icon(Icons.search);
+        this._appBarTitle = new Text('Search Example');
+        filteredNames = names;
+        //_filter.clear();
+      }
+    });
   }
 
   @override
@@ -100,7 +141,11 @@ class _SelesaiPageState extends State<SelesaiPage> {
                     return HomePage();
                   }));
                 }),
-            IconButton(onPressed: () {}, icon: Icon(Icons.search))
+            // IconButton(
+            //     onPressed: () {
+            //       _searchPressed();
+            //     },
+            //     icon: Icon(Icons.search))
           ],
           backgroundColor: Color(0xfffdd835),
         ),
